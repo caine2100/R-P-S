@@ -1,0 +1,48 @@
+import random
+
+op_1 = 'rock'
+op_2 = 'scissors'
+op_3 = 'paper'
+
+
+values = {
+    0:{'item': op_1, op_2:1, op_3:0},
+    1:{'item': op_3, op_2:0, op_1:1},
+    2:{'item': op_2, op_1:0, op_3:1},
+}
+
+ans_options = [v['item'].lower() for k, v in values.items()]
+
+def game():
+    while True:
+        ans1 = (input(f"{', '.join(ans_options)}?:    ")).lower()
+        if ans1 not in ans_options:
+            continue
+        
+        opps = random.choice(values)
+        opps_value = opps["item"]
+
+        
+        for k, v in opps.items():
+            if k == ans1:
+                if v == 0:
+                    print(f'You have won, Enemy was: {opps_value}')
+                else:
+                    print(f'You have lost, Enemy was: {opps_value}')
+                break
+        else:
+            print('It was a Draw')
+
+
+def menu():
+    print("######################")
+    print("######welcome to######")
+    print("rock, paper, scissors")
+    print("######################")
+    print("#####type 'start'#####")
+    print("######################")
+    print("######################")
+    input('Press enter to start: ')
+    game()
+    
+menu()
