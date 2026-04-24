@@ -1,0 +1,63 @@
+import random
+
+
+op_1 = 'rock'
+op_2 = 'scissors'
+op_3 = 'paper'
+
+
+values = {
+    0:{'item': op_1, op_2:1, op_3:0},
+    1:{'item': op_3, op_2:0, op_1:1},
+    2:{'item': op_2, op_1:0, op_3:1},
+}
+
+ans_options = [v['item'].lower() for k, v in values.items()]
+
+def game():
+    
+    opps_score = 0
+    player_score = 0
+    
+    while opps_score < 5 and player_score < 5:
+        ans1 = (input(f"{', '.join(ans_options)}?:    ")).lower()
+        if ans1 not in ans_options:
+            continue
+        
+        opps = random.choice(values)
+        opps_value = opps["item"]
+
+        
+        for k, v in opps.items():
+            if k == ans1:
+                if v == 0:
+                    print(f'You have won, opponent was: {opps_value}')
+                    player_score += 1
+                    print("player score: ", player_score,)
+                    print("opponent score: ", opps_score)
+                else:
+                    print(f'You have lost, opponent was: {opps_value}')
+                    opps_score += 1
+                    print("player score: ", player_score,)
+                    print("opponent score: ", opps_score)
+                break
+        else:
+            print('It was a Draw')
+    if opps_score == 5:
+        print("opponent has won")
+    if player_score == 5:
+        print("you have won")
+
+
+def menu():
+    print("######################")
+    print("######welcome to######")
+    print("rock, paper, scissors")
+    print("######################")
+    print("#####type 'start'#####")
+    print("######################")
+    print("######################")
+    input('Press enter to start: ')
+    game()
+    
+menu()
